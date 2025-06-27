@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>*** DONATION DISTANCE CALCULATOR ***</title>
+    <style>
+        body {
+            background-color: #ff00ff;
+            background-image:
+                radial-gradient(circle at 25% 25%, #ffff00 2px, transparent 2px),
+                radial-gradient(circle at 75% 75%, #00ffff 2px, transparent 2px);
+            background-size: 20px 20px;
+            font-family: "Comic Sans MS", cursive;
+            margin: 0;
+            padding: 20px;
+            color: #000000;
+            animation: rainbow-bg 5s infinite;
+        }
+
+        @keyframes rainbow-bg {
+            0% { background-color: #ff00ff; }
+            16% { background-color: #ff0000; }
+            32% { background-color: #ffff00; }
+            48% { background-color: #00ff00; }
+            64% { background-color: #00ffff; }
+            80% { background-color: #0000ff; }
+            100% { background-color: #ff00ff; }
+        }
+
+        h1 {
+            color: #ffff00;
+            text-align: center;
+            font-size: 32px;
+            text-decoration: underline;
+            margin-bottom: 5px;
+            text-shadow: 3px 3px 0px #ff0000, 6px 6px 0px #00ff00;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .subtitle {
+            color: #ff0000;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 0px #00ffff;
+        }
+
+        .main-table {
+            background: linear-gradient(45deg, #ff00ff, #ffff00, #00ff00, #00ffff);
+            background-size: 400% 400%;
+            animation: gradient-shift 3s ease infinite;
+            border: 5px ridge #ff0000;
+            width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+            box-shadow: 10px 10px 0px #000000;
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .conversion-box {
+            background-color: #ffff00;
+            border: 5px dashed #ff0000;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #ff0000;
+            font-size: 18px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .input-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            border: 3px solid #000000;
+        }
+
+        .input-table td {
+            padding: 12px;
+            border: 3px groove #ff00ff;
+            background: linear-gradient(90deg, #00ffff, #ffff00);
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .input-table td:first-child {
+            background: linear-gradient(90deg, #ff0000, #ff00ff);
+            color: #ffffff;
+            text-shadow: 2px 2px 0px #000000;
+            width: 40%;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 4px inset #00ff00;
+            font-family: "Comic Sans MS", cursive;
+            font-size: 14px;
+            background-color: #ffffff;
+            color: #000000;
+            font-weight: bold;
+        }
+
+        input:focus {
+            background-color: #ffff00;
+            border-color: #ff0000;
+            animation: input-glow 1s infinite;
+        }
+
+        @keyframes input-glow {
+            0%, 100% { box-shadow: 0 0 5px #ff0000; }
+            50% { box-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000; }
+        }
+
+        .result-box {
+            background: linear-gradient(45deg, #00ff00, #ffff00, #ff0000, #ff00ff);
+            border: 5px outset #0000ff;
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+            color: #000000;
+            margin: 20px 0;
+            min-height: 50px;
+            font-size: 18px;
+            text-shadow: 2px 2px 0px #ffffff;
+            animation: result-flash 2s infinite;
+        }
+
+        @keyframes result-flash {
+            0%, 50%, 100% { opacity: 1; }
+            25%, 75% { opacity: 0.7; }
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 14px;
+            color: #000000;
+            margin-top: 20px;
+            border-top: 5px dotted #ff0000;
+            padding-top: 15px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .blink {
+            animation: blink 0.5s linear infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .marquee {
+            background: linear-gradient(90deg, #0000ff, #ff0000, #00ff00, #ffff00);
+            color: #ffffff;
+            padding: 10px;
+            margin: 15px 0;
+            border: 3px solid #000000;
+            font-weight: bold;
+            font-size: 16px;
+            text-shadow: 2px 2px 0px #000000;
+        }
+
+        a {
+            color: #ff0000;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        a:visited {
+            color: #800080;
+        }
+
+        a:hover {
+            background-color: #ffff00;
+            color: #000000;
+        }
+
+        .image-frame {
+            border: 3px solid #000000;
+            background-color: #ffffff;
+            padding: 5px;
+            margin: 5px;
+            display: inline-block;
+            box-shadow: 3px 3px 0px #808080;
+        }
+
+        .banner-frame {
+            border: 5px ridge #ff0000;
+            background-color: #ffff00;
+            padding: 10px;
+            margin: 10px auto;
+            display: block;
+            width: 500px;
+            height: 80px;
+            text-align: center;
+            line-height: 60px;
+            font-weight: bold;
+            font-size: 20px;
+            color: #ff0000;
+            box-shadow: 5px 5px 0px #000000;
+        }
+
+        .icon-frame {
+            border: 2px solid #000000;
+            background-color: #ffffff;
+            width: 50px;
+            height: 50px;
+            display: inline-block;
+            margin: 5px;
+            text-align: center;
+            line-height: 46px;
+            font-weight: bold;
+            box-shadow: 2px 2px 0px #808080;
+        }
+
+        .badge-frame {
+            border: 2px solid #000000;
+            background-color: #c0c0c0;
+            width: 88px;
+            height: 31px;
+            display: inline-block;
+            margin: 2px;
+            text-align: center;
+            line-height: 27px;
+            font-size: 10px;
+            font-weight: bold;
+            box-shadow: 2px 2px 0px #808080;
+        }
+
+        .construction-frame {
+            border: 4px dashed #ff0000;
+            background: repeating-linear-gradient(
+                45deg,
+                #ffff00,
+                #ffff00 10px,
+                #000000 10px,
+                #000000 20px
+            );
+            padding: 10px;
+            margin: 10px auto;
+            width: 300px;
+            height: 50px;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            color: #ff0000;
+            animation: construction-blink 1s infinite;
+        }
+
+        @keyframes construction-blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.5; }
+        }
+
+        @keyframes donation-pulse {
+            0% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.1) rotate(1deg); }
+            50% { transform: scale(1.05) rotate(0deg); }
+            75% { transform: scale(1.1) rotate(-1deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-table">
+        <h1>*** JASPERS JULYATHON JONATION JISTANCE JALCULATOR ***</h1>
+        <p class="subtitle">~*~ Convert between donations and running distance ~*~</p>
+
+        <div class="marquee">
+            <marquee>*** Welcome to the AMAZING donation calculator! Jasper is RUNNING for Acorns Childrens Hospice! ***</marquee>
+        </div>
+
+        <div class="conversion-box">
+            <span class="blink">CONVERSION RATE:</span> 500 METRES PER 1 POUND DONATED!!!
+        </div>
+
+        <table class="input-table">
+            <tr>
+                <td>*** DONATION AMOUNT (£):</td>
+                <td><input type="number" id="money" step="0.01" min="0" placeholder="Enter £££"></td>
+            </tr>
+            <tr>
+                <td>*** DISTANCE (KM):</td>
+                <td><input type="number" id="distance" step="0.01" min="0" placeholder="Enter KM"></td>
+            </tr>
+        </table>
+
+        <div class="result-box" id="result">
+            *** ENTER A VALUE ABOVE TO SEE THE MAGIC CONVERSION ***
+        </div>
+
+        <center>
+            <div style="margin: 20px 0;">
+                <a href="https://www.justgiving.com/page/jasper-shanks-1212#sharePage" target="_blank" style="text-decoration: none;">
+                    <div style="
+                        background: linear-gradient(45deg, #ff0000, #ffff00, #00ff00, #00ffff);
+                        border: 5px outset #ff0000;
+                        padding: 15px 30px;
+                        font-size: 24px;
+                        font-weight: bold;
+                        color: #ffffff;
+                        text-shadow: 3px 3px 0px #000000;
+                        cursor: pointer;
+                        display: inline-block;
+                        border-radius: 10px;
+                        box-shadow: 5px 5px 0px #000000;
+                        animation: donation-pulse 2s infinite;
+                        font-family: 'Comic Sans MS', cursive;
+                    ">
+                        *** DONATE NOW! ***
+                    </div>
+                </a>
+            </div>
+        </center>
+
+        <div class="footer">
+            <center>
+                <div class="construction-frame">
+                    <img src="images/construction.gif" alt="Under Construction" style="max-width: 280px; max-height: 30px;" onerror="this.style.display='none'; this.nextSibling.style.display='block';">
+                    <span style="display: none;">*** UNDER CONSTRUCTION ***</span>
+                </div>
+            </center>
+            <br>
+        </div>
+    </div>
+
+    <script>
+        var moneyInput = document.getElementById('money');
+        var distanceInput = document.getElementById('distance');
+        var result = document.getElementById('result');
+
+        var METRES_PER_POUND = 500;
+
+        function formatDistance(metres) {
+            var km = metres / 1000;
+            return km.toFixed(2) + " KM";
+        }
+
+        function formatMoney(pounds) {
+            return "£" + pounds.toFixed(2);
+        }
+
+        function updateFromMoney() {
+            var money = parseFloat(moneyInput.value);
+
+            if (isNaN(money) || money < 0) {
+                result.innerHTML = '*** ENTER A VALID DONATION AMOUNT ***';
+                distanceInput.value = '';
+                return;
+            }
+
+            var metres = money * METRES_PER_POUND;
+            var km = metres / 1000;
+            distanceInput.value = km.toFixed(2);
+
+            result.innerHTML = '<b>' + formatMoney(money) + ' = ' + formatDistance(metres) + ' OF RUNNING!!!</b>';
+        }
+
+        function updateFromDistance() {
+            var km = parseFloat(distanceInput.value);
+
+            if (isNaN(km) || km < 0) {
+                result.innerHTML = '*** ENTER A VALID DISTANCE ***';
+                moneyInput.value = '';
+                return;
+            }
+
+            var metres = km * 1000;
+            var money = metres / METRES_PER_POUND;
+            moneyInput.value = money.toFixed(2);
+
+            result.innerHTML = '<b>' + formatDistance(metres) + ' = ' + formatMoney(money) + ' DONATION NEEDED!!!</b>';
+        }
+
+        moneyInput.onchange = function() {
+            if (moneyInput.value !== '') {
+                updateFromMoney();
+            } else {
+                distanceInput.value = '';
+                result.innerHTML = '*** ENTER A VALUE ABOVE TO SEE THE MAGIC CONVERSION ***';
+            }
+        };
+
+        distanceInput.onchange = function() {
+            if (distanceInput.value !== '') {
+                updateFromDistance();
+            } else {
+                moneyInput.value = '';
+                result.innerHTML = '*** ENTER A VALUE ABOVE TO SEE THE MAGIC CONVERSION ***';
+            }
+        };
+
+        moneyInput.onfocus = function() {
+            if (distanceInput.value !== '') {
+                distanceInput.value = '';
+            }
+        };
+
+        distanceInput.onfocus = function() {
+            if (moneyInput.value !== '') {
+                moneyInput.value = '';
+            }
+        };
+    </script>
+</body>
+</html>
